@@ -1,3 +1,3 @@
 # BPM Calculator
 
-[https://npazosmendez.github.io/bpm-calculator]
+https://npazosmendez.github.io/bpm-calculator
