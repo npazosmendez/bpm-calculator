@@ -2,9 +2,32 @@
     <title>BPM Calculator</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div id="bpm" class="bpm">0</div>
-    <canvas id="line-chart" width="100" height="20"></canvas>
+    <div class="container-fluid" >
+        <div class="row" >
+            <div class="col-sm-12" style="padding:0;margin:0;">
+                <button class="beat-btn btn btn-primary btn-block" onclick="beat()">
+                    <span class="btn-text">
+                        BEAT<br>[SPACE]
+                    </span>
+                </button>
+            </div>
+            <div class="col-sm-12" style="padding:0;margin:0;">
+                <button class="reset-btn btn btn-primary btn-block" onclick="reset()">
+                    <span class="btn-text">
+                        RESET [R]
+                    </span>
+                </button>
+            </div>
+            <div class="col-sm-12 chart" style="padding:0;margin:0;">
+                <canvas id="line-chart"></canvas>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>

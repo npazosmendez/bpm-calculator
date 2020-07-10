@@ -1,3 +1,9 @@
+// Unfocus buttons to prevent trigerring them with keyboard
+document.querySelectorAll("button").forEach( function(item) {
+    item.addEventListener('focus', function() {
+        this.blur();
+    })
+});
 
 var chart = new Chart(document.getElementById("line-chart"), {
     type: 'line',
@@ -12,19 +18,27 @@ var chart = new Chart(document.getElementById("line-chart"), {
       ]
     },
     options: {
+        maintainAspectRatio: false,
+        responsive: true,
         legend : {
             display: false
         },
         tooltips: { mode: 'index' },
         hover: {
            mode: 'index',
-           intersect: false
+           intersect: true
         },
         scales: {
             yAxes: [{
                 ticks: {
                     suggestedMin: 0,
-                    suggestedMax: 200
+                    suggestedMax: 100,
+                    fontSize: 25
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    display: false,
                 }
             }]
         },
@@ -45,25 +59,48 @@ class BPMCalculator {
     bpm() {
         return Math.round(60000.0 * this.period / (performance.now() - this.last_period));
     }
-    hit() {
-        chart.update();
+    beat() {
         this.count = (this.count+1) % this.period;
         if(this.count == 0) {
             let bpm = this.bpm();
             this.callback(bpm);
-            chart.data.datasets[0].data.push(bpm);
-            chart.data.labels.push("?");
             this.last_period = performance.now();
         }
     }
 }
 
-var calc = new BPMCalculator(
-    function (bpm) {
-        document.getElementById("bpm").textContent = bpm.toString();
-    }
-);
-window.addEventListener('keydown', (w, e) => calc.hit(), false);
+function callback(bpm) {
+    document.getElementById("bpm").textContent = bpm.toString();
+    chart.data.datasets[0].data.push(bpm);
+    chart.data.labels.push("");
+    chart.update();
+}
+var calc = new BPMCalculator(callback);
 
 
+// Interface
+function beat() {
+    calc.beat();
+}
+function reset() {
+    calc.reset();
+    chart.data.datasets[0].data = [];
+    chart.data.labels = [];
+    chart.update();
+}
+window.addEventListener('keydown',
+    function (event) {
+        switch (event.key) {
+            case ' ':
+                beat()
+                break;
+            case 'R':
+            case 'r':
+                reset()
+                break;
+            default:
+                break;
+        }
+    },
+    false);
 
