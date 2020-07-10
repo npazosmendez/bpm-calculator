@@ -1,40 +1,51 @@
 body {
-    background-color: rgb(255, 164, 164);
+    background-color: #af5276;
     width: 100%;
     height:  100%;
     margin: 0;
 }
 
-.bpm {
-    text-align: center;
-    font-size: 100px;
-    font-family: monospace;
-    color: #E40000;
+.btn{
+    background-color:#853e59;
+    border-radius: 0;
+    border-width: 0;
+    position: relative;
 }
 
-.beat-btn {
-    height:150px;
-    position: relative;
+.btn:hover, .btn:focus{
+    background-color:#b34c1c;
 }
-.reset-btn {
+.btn:active{
+    background-color:#eca381;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+#bpm {
+    text-align: center;
+    font-size: 150px;
+    font-family: monospace;
+    color: #581845;
+}
+
+#beat-btn {
+    height:200px;
+}
+
+#reset-btn {
     height:70px;
-    position: relative;
 }
 
 .chart {
-    position: absolute;
+    position: relative;
     top: 20px;
-    bottom: 0;
-    height: calc(100% - 450px);
-    margin-top: 20px;
-    margin-left: 0px;
-    margin-right: 10px;
+    height: calc(100% - 540px);
 }
-
 
 .btn-text {
     font-size: 40px;
     font-family: monospace;
+    color: #581845;
 
     margin: 0;
     position: absolute;

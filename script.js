@@ -1,50 +1,4 @@
-// Unfocus buttons to prevent trigerring them with keyboard
-document.querySelectorAll("button").forEach( function(item) {
-    item.addEventListener('focus', function() {
-        this.blur();
-    })
-});
-
-var chart = new Chart(document.getElementById("line-chart"), {
-    type: 'line',
-    data: {
-      labels: [],
-      datasets: [{
-          data: [],
-          borderColor: "rgba(200,0,0,0.5)",
-          backgroundColor: "rgba(180,0,0,0.5)",
-          fill: "origin",
-        }
-      ]
-    },
-    options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        legend : {
-            display: false
-        },
-        tooltips: { mode: 'index' },
-        hover: {
-           mode: 'index',
-           intersect: true
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    suggestedMin: 0,
-                    suggestedMax: 100,
-                    fontSize: 25
-                }
-            }],
-            xAxes: [{
-                ticks: {
-                    display: false,
-                }
-            }]
-        },
-    }
-  });
-
+// BPM Calculator
 class BPMCalculator {
     constructor(callback) {
         this.callback = callback;
@@ -69,16 +23,60 @@ class BPMCalculator {
     }
 }
 
-function callback(bpm) {
+// Chart
+var chart = new Chart(document.getElementById("line-chart"), {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+          data: [],
+          borderColor: "#581845",
+          backgroundColor: "#5818456c",
+          fill: "origin",
+        }
+      ]
+    },
+    options: {
+        maintainAspectRatio: false,
+        responsive: true,
+        legend : {
+            display: false
+        },
+        tooltips: { mode: 'index' },
+        hover: {
+           mode: 'index',
+           intersect: true
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 100,
+                    fontSize: 25,
+                    fontColor: "#581845",
+                    fontStyle: "bold",
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    display: false,
+                }
+            }]
+        },
+    }
+  });
+
+// ------  Setup  ---------
+// ~~~~~~~~~~~~~~~~~~~~~~~~
+
+function onBPM(bpm) {
     document.getElementById("bpm").textContent = bpm.toString();
     chart.data.datasets[0].data.push(bpm);
     chart.data.labels.push("");
     chart.update();
 }
-var calc = new BPMCalculator(callback);
+var calc = new BPMCalculator(onBPM);
 
-
-// Interface
 function beat() {
     calc.beat();
 }
@@ -88,11 +86,12 @@ function reset() {
     chart.data.labels = [];
     chart.update();
 }
+
 window.addEventListener('keydown',
     function (event) {
         switch (event.key) {
             case ' ':
-                beat()
+                beat();
                 break;
             case 'R':
             case 'r':
@@ -104,3 +103,9 @@ window.addEventListener('keydown',
     },
     false);
 
+// Unfocus buttons to prevent trigerring them with keyboard
+document.querySelectorAll("button").forEach( function(item) {
+    item.addEventListener('focus', function() {
+        this.blur();
+    })
+});
