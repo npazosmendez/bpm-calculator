@@ -13,6 +13,9 @@ class BPMCalculator {
     bpm() {
         return Math.round(60000.0 * this.period / (performance.now() - this.last_period));
     }
+    barBeats() {
+        return this.count || 4;
+    }
     beat() {
         this.count = (this.count+1) % this.period;
         if(this.count == 0) {
@@ -79,11 +82,13 @@ var calc = new BPMCalculator(onBPM);
 
 function beat() {
     calc.beat();
+    document.getElementById("bar").textContent = "★".repeat(calc.barBeats()) + "-".repeat(calc.period - calc.barBeats());
 }
 function reset() {
     calc.reset();
     chart.data.datasets[0].data = [];
     chart.data.labels = [];
+    document.getElementById("bar").textContent = "-".repeat(calc.period);
     chart.update();
 }
 

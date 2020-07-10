@@ -23,9 +23,15 @@ body {
 
 #bpm {
     text-align: center;
-    font-size: 150px;
+    font-size: 130px;
     font-family: monospace;
     color: #581845;
+}
+#bar {
+    text-align: center;
+    font-size: 50px;
+    color: #581845;
+    font-family: monospace;
 }
 
 #beat-btn {
