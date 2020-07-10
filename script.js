@@ -34,7 +34,7 @@ var chart = new Chart(document.getElementById("line-chart"), {
       datasets: [{
           data: [],
           borderColor: "#581845",
-          backgroundColor: "#5818456c",
+          backgroundColor: "rgba(86,24,69,0.7)",
           fill: "origin",
         }
       ]
@@ -45,11 +45,7 @@ var chart = new Chart(document.getElementById("line-chart"), {
         legend : {
             display: false
         },
-        tooltips: { mode: 'index' },
-        hover: {
-           mode: 'index',
-           intersect: true
-        },
+        tooltips: { mode: 'nearest' },
         scales: {
             yAxes: [{
                 ticks: {
